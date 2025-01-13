@@ -141,3 +141,4 @@ For questions or suggestions, please contact:
 
 **John McCants**  
 [LinkedIn](https://www.linkedin.com/in/johnmccants/)
+[Email](mailto:johnmccants002@gmail.com)
