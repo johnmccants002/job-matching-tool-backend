@@ -10,6 +10,10 @@ app.use(cors());
 const linkedinAuthRoutes = require("./routes/linkedinAuth");
 app.use("/auth/linkedin", linkedinAuthRoutes);
 
+// Resume upload route
+const resumeRoutes = require("./routes/resume");
+app.use("/api/resume", resumeRoutes);
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
