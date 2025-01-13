@@ -14,6 +14,10 @@ app.use("/auth/linkedin", linkedinAuthRoutes);
 const resumeRoutes = require("./routes/resume");
 app.use("/api/resume", resumeRoutes);
 
+// Job matching route
+const jobMatchingRoutes = require("./routes/jobMatching");
+app.use("/api/jobs", jobMatchingRoutes);
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
