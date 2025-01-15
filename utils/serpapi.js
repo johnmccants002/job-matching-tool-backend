@@ -31,11 +31,13 @@ const fetchJobListings = async (skills) => {
 
     const search = new GoogleSearch(process.env.SERPAPI_API_KEY);
 
-    // Construct the query with OR between skills
+    // Set a valid location
+    const location = "United States"; // Adjust as needed for your use case
+
     const params = {
       engine: "google_jobs",
       q: skills.join(" OR "), // Match any of the extracted skills
-      location: "Remote", // You can modify this as needed
+      location: location, // Use a supported location
     };
 
     console.log("Search parameters:", params);
@@ -43,10 +45,9 @@ const fetchJobListings = async (skills) => {
     // Return a promise to fetch the job listings
     return new Promise((resolve, reject) => {
       search.json(params, (data) => {
-        console.log("SerpAPI Response:", JSON.stringify(data, null, 2));
+        console.log("SerpAPI Response:", JSON.stringify(Object.keys(data)));
 
         if (data.jobs_results) {
-          console.log(`Found ${data.jobs_results.length} job(s).`);
           resolve(data.jobs_results);
         } else {
           console.error("No jobs found in the response.");

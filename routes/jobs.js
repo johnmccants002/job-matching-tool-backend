@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const { extractKeywords } = require("../utils/openai");
+const { getHiringManagerInfo } = require("../utils/openai");
 
 const router = express.Router();
 
@@ -22,6 +23,17 @@ router.post("/", async (req, res) => {
     console.error("Error fetching jobs:", error);
     res.status(500).json({ error: "Failed to fetch jobs" });
   }
+});
+
+router.post("/get-hiring-manager", async (req, res) => {
+  console.log("get-hiring-manager function called");
+  console.log(req.body);
+  const { companyName } = req.body;
+  if (!companyName) {
+    return res.status(400).json({ error: "Company name is required" });
+  }
+  const info = await getHiringManagerInfo(companyName);
+  res.json({ companyName, hiringManagerInfo: info });
 });
 
 module.exports = router;

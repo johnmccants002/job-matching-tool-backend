@@ -52,6 +52,7 @@ const parseResume = async (filePath) => {
       ],
       temperature: 0.7,
       max_tokens: 300,
+      response_format: { type: "json_object" },
     });
 
     var rawResponse = response.choices[0]?.message?.content;

@@ -3,7 +3,8 @@ const multer = require("multer");
 const path = require("path");
 const router = express.Router();
 const parseResume = require("../utils/resumeParser");
-const { fetchJobListings } = require("../utils/serpapi");
+const fetchJobListings = require("../utils/remotive");
+const { getHiringManagerInfo } = require("../utils/openai");
 
 // Configure Multer for file uploads
 const upload = multer({
@@ -43,9 +44,8 @@ router.post("/match", upload.single("resume"), async (req, res) => {
     // Step 3: Fetch job listings based on extracted skills
     console.log("Fetching job listings based on extracted skills...");
     const matchedJobs = await fetchJobListings(extractedData.skills);
-    console.log("Job listings fetched successfully.");
     console.log("Matched jobs:", matchedJobs);
-
+    console.log("Job listings fetched successfully.");
     // Step 4: Return matched jobs to the client
     res.status(200).json({
       message: "Job matching successful",
